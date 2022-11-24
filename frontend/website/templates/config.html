@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% block title %}Notes{% endblock %} {% block content
+%}
+<h2 align="center">User Data</h2>
+<div class="list-group list-group-flush" id="user_data">
+  <div id="latitude" class="panel panel-default">
+    <div class="panel-body">
+      <p>Latitude: {{ user_data.latitude }}</p>
+    </div>
+  </div>
+  <div id="longitude" class="panel panel-default">
+    <div class="panel-body">
+      <p>Longitude: {{ user_data.longitude }}</p>
+    </div>
+  </div>
+  <div id="roof_size" class="panel panel-default">
+    <div class="panel-body">
+      <p>Roof Size: {{ user_data.roof_size }}</p>
+    </div>
+  </div>
+  <div id="tank_volume" class="panel panel-default">
+    <div class="panel-body">
+      <p>Tank Volume: {{ user_data.tank_volume }}</p>
+    </div>
+  </div>
+  <div id="garden_size" class="panel panel-default">
+    <div class="panel-body">
+      <p>Garden Size: {{ user_data.garden_size }}</p>
+    </div>
+  </div>
+</div>
+<a href="/config/input" class="btn btn-info" role="button"
+  >Change Configuration</a
+>
+{% endblock %}
