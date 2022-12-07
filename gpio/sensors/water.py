@@ -17,7 +17,6 @@ def main():
     while True:
         dist = distance_sensor.get_distance()
         mois = moisture_sensor.moisture
-        print(f"Distance: {dist}")
         if mois != MOIS or dist != DIST:
             MOIS = mois
             DIST = dist
