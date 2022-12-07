@@ -3,7 +3,6 @@ import pandas as pd
 import csv
 from datetime import datetime
 import sys
-import display
 
 sys.path.insert(0, "gpio/actuators")
 
@@ -37,6 +36,6 @@ def get_data(measurement):
         return df
 
 
-if __name__ == '__main__':
-    print(get_data("water_test"))
-    display.setText(get_data("water_test").iloc[0, 2])
+# if __name__ == '__main__':
+#     print(get_data("temp_test"))
+    #display.setText(get_data("water_test").iloc[0, 2])

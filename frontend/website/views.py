@@ -1,5 +1,10 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 import json
+import sys
+
+sys.path.append('backend')
+
+from db_access import get_data
 
 views = Blueprint('views', __name__)
 
@@ -14,7 +19,6 @@ def home():
 @views.route('/config', methods=['GET'])
 def config():
     try:
-        print("I tried!")
         user_data = get_user_data()
         return render_template('config.html', user_data=user_data)
     except:
@@ -54,11 +58,21 @@ def add_config():
     return render_template('config_form.html')
 
 
+@views.route('/water', methods=['GET'])
+def water():
+    return render_template('water.html')
+
+
+@views.route('/heat', methods=['GET'])
+def heat():
+    heat_data = get_current_temphumgas()
+    return render_template('heat.html', heat_data=heat_data)
+
+
 def get_user_data():
     global CONFIG_FILE
     data = open(CONFIG_FILE)
     data_json = json.loads(data.read())
-    print(data_json)
     return data_json
 
 
@@ -66,3 +80,16 @@ def safe_user_data(data):
     user_data_json = json.dumps(data)
     f = open(CONFIG_FILE, mode='w')
     f.write(user_data_json)
+
+
+def get_current_temphumgas():
+    data = get_data("temp_test")
+    temp = data["temperature"].iloc[-1].item()
+    hum = data["humidity"].iloc[-1].item()
+    gas = data["gas"].iloc[-1].item()
+    data_json = {
+        'temp': temp,
+        'hum': hum,
+        'gas': gas
+    }
+    return data_json

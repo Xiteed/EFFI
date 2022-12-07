@@ -1,6 +1,10 @@
-{% extends 'base.html' %} {% block title %}Notes{% endblock %} {% block content
-%}
-<h2 align="center">User Data</h2>
+{% extends 'base.html' %} {% block title %}User Info{% endblock %} {% block
+content %}
+<div class="row">
+  <div class="col text-center">
+    <h2>User Data</h2>
+  </div>
+</div>
 <div class="list-group list-group-flush" id="user_data">
   <div id="latitude" class="panel panel-default">
     <div class="panel-body">
@@ -28,7 +32,11 @@
     </div>
   </div>
 </div>
-<a href="/config/input" class="btn btn-info" role="button"
-  >Change Configuration</a
->
+<div class="row">
+  <div class="col text-center">
+    <a href="/config/input" class="btn btn-info" role="button"
+      >Change Configuration</a
+    >
+  </div>
+</div>
 {% endblock %}

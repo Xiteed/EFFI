@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<div class="row">
+  <div class="col text-center">
+    <h2>Heat Solution</h2>
+  </div>
+</div>
+<div class="list-group list-group-flush" id="heat_data">
+  <div id="temperature" class="panel panel-default">
+    <div class="panel-body">
+      <p>Current Temperature: {{ heat_data.temp }}</p>
+    </div>
+  </div>
+  <div id="temperature" class="panel panel-default">
+    <div class="panel-body">
+      <p>Current Humidity: {{ heat_data.hum }}</p>
+    </div>
+  </div>
+  <div id="temperature" class="panel panel-default">
+    <div class="panel-body">
+      <p>Current Gas Level: {{ heat_data.gas }}</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col text-center">
+    <a
+      href="https://corlysis.com/grafana/dashboard/snapshot/p3I3Rd1m2Oy1CRzmdAzIyx5vzdyGIiIi"
+      class="btn"
+      role="button"
+      target="_blank"
+      ><img
+        src="https://cdn.icon-icons.com/icons2/2699/PNG/512/grafana_logo_icon_171048.png"
+        width="25"
+        height="25"
+      />
+      Dashboard
+    </a>
+  </div>
+</div>
+{% endblock %}
