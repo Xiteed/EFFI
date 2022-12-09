@@ -1,74 +1,42 @@
 # EFFI Solution
 
-This project is a minimal viable product for an application helping you to safe resources in your everyday life.
+This project is a minimal viable product for an application helping you to safe resources in your everyday life
 
-## Links
+## 🚀 Features
 
-- [Repo](https://github.com/Rohit19060/<project-name> "<project-name> Repo")
+- Helps you to safe heating energy by optimizing ventilation times.
+- Provides garden watering support with implemented moisture monitoring and water tank level forecast.
 
-- [Live](<Homepage url> "Live View")
+## 🦋 Prerequisite
 
-- [Bugs](https://github.com/Rohit19060/<project-name>/issues "Issues Page")
+### Hardware Prequisites
 
-- [API](<API Link> "API")
+- Raspberry Pi 3 + Grove Base Hat
+- Grove Moisture Sensor v1.4
+- Grove Ultrasonic Distance Sensor v2.0
+- Grove Temperature&Humidity Sensor v1.2
+- Grove Gas Sensor v1.5
+- Grove LCD v2.0
+- Grove Buzzer v1.2
+- Grove Red LED Button v1.0
 
-## Screenshots
+### Software Prequisites on Raspberry Pi
 
-![Home Page](/screenshots/1.png "Home Page")
-
-![](/screenshots/2.png)
-
-![](/screenshots/3.png)
+- Python Installed
+- Several Python Libraries Installed (requests, pandas, [grove.py](https://github.com/Seeed-Studio/grove.py), openmeteo_py, flask)
+- Git Installed
 
 ## Available Commands
 
-In the project directory, you can run:
+## 🛠️ Installation Steps
 
-### `npm start" : "react-scripts start"`,
+## 👷 Built With
 
-The application is based on a raspberry pi 3 and several sensors providing the necessary sensor data.
-
-### `"npm run build": "react-scripts build"`,
-
-Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes. Your app will be ready to deploy!
-
-### `"npm run test": "react-scripts test"`,
-
-Launches the test runner in the interactive watch mode.
-
-### `"npm run dev": "concurrently "nodemon server" "npm run start"`,
-
-For running the server and app together I am using concurrently this helps a lot in the MERN application as it runs both the server (client and server) concurrently. So you can work on them both together.
-
-### `"serve": "node server"`
-
-For running the server file on you can use this command.
-
-### `npm run serve`
-
-## Built With
-
-- JavaScript
-- Node
-- NPM
-- Webpack
+- Python
 - HTML
-- CSS
-
-## Future Updates
-
-- [ ] Reliable Storage
 
 ## Author
 
-**Rohit Jain**
-
-- [Profile](https://github.com/rohit19060 "Rohit jain")
-- [Email](mailto:rohitjain19060@gmail.com?subject=Hi "Hi!")
-- [Website](https://kingtechnologies.in "Welcome")
-
-## 🤝 Support
-
-Contributions, issues, and feature requests are welcome!
-
-Give a ⭐️ if you like this project!
+**Pirmin Boensch**
+**Gregor Schwerwitzel**
+**Niels Andersson**
