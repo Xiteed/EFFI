@@ -6,6 +6,7 @@ PARAMS = {"db": "effidb", "u": "token",
 
 
 def upload_data(payload):
-    r = requests.post(URL, params=PARAMS, data=payload)
-    if (r.status_code != 204):
-        print(f"ERROR: {r.status_code}, {r.content}")
+    response = requests.post(URL, params=PARAMS, data=payload)
+    if (response.status_code != 204):
+        print(
+            f"ERROR Uploading Data: {response.status_code}, {response.content}")
