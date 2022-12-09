@@ -1,6 +1,6 @@
-<h1 align="center"><EFFI Solution></h1>
+# EFFI Solution
 
-<p align="center"><This project is a minimal viable product for an application helping you to safe resources in your everyday life></p>
+This project is a minimal viable product for an application helping you to safe resources in your everyday life.
 
 ## Links
 
