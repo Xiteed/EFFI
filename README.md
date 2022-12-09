@@ -35,8 +35,8 @@ This project is a minimal viable product for an application helping you to safe 
 - Python
 - HTML
 
-## Author
+## Authors
 
-**Pirmin Boensch**
-**Gregor Schwerwitzel**
-**Niels Andersson**
+- **Pirmin Boensch**
+- **Gregor Schwerwitzel**
+- **Niels Andersson**
