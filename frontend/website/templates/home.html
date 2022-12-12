@@ -5,4 +5,10 @@
     <h2>Welcome to EFFI</h2>
   </div>
 </div>
-{% endblock %}
+{% if not vars.started %}
+<div class="row">
+  <div class="col text-center">
+    <a href="/start" class="btn btn-info" role="button">Start Application</a>
+  </div>
+</div>
+{% endif %} {% endblock %}

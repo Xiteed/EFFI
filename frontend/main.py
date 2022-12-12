@@ -1,10 +1,16 @@
 import socket
+# import subprocess
 from website import create_app
 
 app = create_app()
 
 h_name = socket.gethostname()
-IP_addres = socket.gethostbyname(h_name)
+IP_address = socket.gethostbyname(h_name)
+
 
 if __name__ == '__main__':
-    app.run(debug=True, host=IP_addres, port=8080)
+    # p = subprocess.Popen(['hostname -I'], shell=True)
+    # p.wait()
+    # out, err = p.communicate()
+    # IP_address = out
+    app.run(debug=True, host=IP_address, port=8080)

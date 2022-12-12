@@ -29,8 +29,8 @@ def measure_air_quality():
         time.sleep(1)
 
 
-if __name__ == '__main__':
-    try:
-        measure_air_quality()
-    except KeyboardInterrupt:
-        print('\nKeyboard interrupt')
+# if __name__ == '__main__':
+#     try:
+#         measure_air_quality()
+#     except KeyboardInterrupt:
+#         print('\nKeyboard interrupt')

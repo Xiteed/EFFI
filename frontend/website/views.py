@@ -5,15 +5,18 @@ import sys
 sys.path.append('backend')
 
 from db_access import get_data
+import data_collector
 
 views = Blueprint('views', __name__)
 
 CONFIG_FILE = 'user_info.json'
-
+STARTED = False
 
 @views.route('/')
 def home():
-    return render_template('home.html')
+    global STARTED
+    vars = {"started": STARTED}
+    return render_template('home.html', vars=vars)
 
 
 @views.route('/config', methods=['GET'])
@@ -67,6 +70,14 @@ def water():
 def heat():
     heat_data = get_current_temphumgas()
     return render_template('heat.html', heat_data=heat_data)
+
+
+@views.route('/start', methods=['GET'])
+def start():
+    global STARTED
+    data_collector.start()
+    STARTED = True
+    return redirect(url_for('views.home'))
 
 
 def get_user_data():
