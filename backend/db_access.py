@@ -31,6 +31,6 @@ def get_data(measurement):
         # Convert the column 'time' to a python datetime type.
         df['time'] = df['time'].apply(lambda x: x.str.slice(0, 13))
         df['time'] = [datetime.fromtimestamp(
-            int(t) / 1000) for t in [df['time'].squeeze()]]
+            int(t) / 1000) for t in df['time'].squeeze()]
 
         return df

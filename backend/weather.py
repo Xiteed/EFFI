@@ -22,8 +22,8 @@ dfhourly["time"] = [datetime.fromisoformat(t) for t in dfhourly["time"]]
 dfdaily = pd.DataFrame(meteo["daily"])
 dfdaily["time"] = [datetime.fromisoformat(t) for t in dfdaily["time"]]
 
-print(dfhourly)
-print(dfdaily)
+# print(dfhourly)
+# print(dfdaily)
 
 def get_temperature():
     return dfhourly.iloc[:25,:]
