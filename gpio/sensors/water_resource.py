@@ -26,8 +26,12 @@ def measure():
             MOIS = mois
             DIST = dist
             # Calculate the tank volume based on the measured distance and the tank volume + height
-            volume = round((math.pi * TANK_RADIUS ^ 2 *
+            volume = round((math.pi * TANK_RADIUS * TANK_RADIUS *
                            (TANK_HEIGHT - dist)) / 1000, 2)
             payload = f'water_resources moisture={mois},tank_volume={volume}\n'
             upload_data(payload)
-        time.sleep(1)
+        time.sleep(5)
+
+
+if __name__ == "__main__":
+    measure()

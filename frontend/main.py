@@ -13,6 +13,6 @@ if __name__ == '__main__':
     # p = subprocess.Popen(['hostname -I'], shell=True)
     # p.wait()
     # out, err = p.communicate()
-    # IP_address = out
+    # IP_address = outx
     # time.sleep(2)
     app.run(debug=True, host=IP_address, port=8080)

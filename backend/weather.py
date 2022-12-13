@@ -30,10 +30,10 @@ dfdaily["time"] = [datetime.fromisoformat(t) for t in dfdaily["time"]]
 # print(dfhourly)
 # print(dfdaily)
 
+
 def get_temperature():
-    return dfhourly.iloc[:25,:]
+    return dfhourly.iloc[:25, :]
+
 
 def get_precipiation():
     return dfdaily["precipitation_sum"].sum()
-
-

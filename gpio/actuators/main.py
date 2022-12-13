@@ -2,6 +2,7 @@ import time
 import speaker
 import window_switch
 import threading
+import display
 
 
 if __name__ == "__main__":
@@ -13,7 +14,9 @@ if __name__ == "__main__":
             if "open" in file.read():
                 opened = True
                 time.sleep(3)
+                display.setText("Close the Window!")
                 window_switch.light_switch()
                 speaker.make_sound()
     buttonThread.join()
     window_switch.light_switch()
+    display.setText("")

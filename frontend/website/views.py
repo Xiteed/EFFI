@@ -4,9 +4,9 @@ import sys
 
 sys.path.append('backend')
 
-import heat_solution
-import data_collector
 from db_access import get_data
+import data_collector
+import heat_solution
 
 views = Blueprint('views', __name__)
 
@@ -86,12 +86,15 @@ def start():
 
 def get_user_data():
     global CONFIG_FILE
-    data = open(CONFIG_FILE)
-    data_json = json.loads(data.read())
-    return data_json
+    with open(CONFIG_FILE, 'r') as file:
+        data_json = json.loads(file.read())
+        return data_json
 
 
 def safe_user_data(data):
     user_data_json = json.dumps(data)
     f = open(CONFIG_FILE, mode='w')
     f.write(user_data_json)
+
+
+get_user_data()

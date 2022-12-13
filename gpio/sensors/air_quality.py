@@ -2,11 +2,22 @@ import time
 from seeed_dht import DHT
 from grove.adc import ADC
 from db_handling import upload_data
-from gas_sensor import GroveGasSensorMQ2
 
 HUMI = 0
 TEMP = 0
 GAS = 0
+
+
+class GroveGasSensorMQ2:
+
+    def __init__(self):
+        self.channel = 1
+        self.adc = ADC()
+
+    @property
+    def MQ2(self):
+        value = self.adc.read(self.channel)
+        return value
 
 
 def measure_air_quality():
@@ -26,4 +37,8 @@ def measure_air_quality():
             GAS = gas
             payload = f'air_quality temperature={temp},humidity={humi},gas={gas}\n'
             upload_data(payload)
-        time.sleep(1)
+        time.sleep(5)
+
+
+if __name__ == "__main__":
+    measure_air_quality()

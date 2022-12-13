@@ -12,5 +12,5 @@ def upload_data(payload):
             f"ERROR Uploading Data: {response.status_code}, {response.content}")
 
 
-# if __name__ == "__main__":
-#     upload_data('water_resources moisture=265,tank_volume=3.05\n')
+if __name__ == "__main__":
+    upload_data('water_resources moisture=412,tank_volume=3.15\n')
