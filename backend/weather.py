@@ -10,13 +10,25 @@ daily = Daily()
 options = Options(latitude, longitude)
 
 mgr = OWmanager(options,
-                hourly.temperature_2m(),)
+                hourly.temperature_2m(),
+                daily.precipitation_sum(),
+                )
 
 # Download data
 meteo = mgr.get_data()
-df = pd.DataFrame(meteo["hourly"])
-df["time"] = [datetime.fromisoformat(t) for t in df["time"]]
-# df = pd.DataFrame(meteo)
-# print(meteo)
-print(df)
-# print(df.loc)
+dfhourly = pd.DataFrame(meteo["hourly"])
+dfhourly["time"] = [datetime.fromisoformat(t) for t in dfhourly["time"]]
+
+dfdaily = pd.DataFrame(meteo["daily"])
+dfdaily["time"] = [datetime.fromisoformat(t) for t in dfdaily["time"]]
+
+print(dfhourly)
+print(dfdaily)
+
+def get_temperature():
+    return dfhourly.iloc[:25,:]
+
+def get_precipiation():
+    return dfdaily["precipitation_sum"].sum()
+
+
