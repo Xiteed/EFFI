@@ -1,9 +1,14 @@
+import json
 import pandas as pd
 from datetime import datetime
 from openmeteo_py import Hourly, Daily, Options, OWmanager
 
-latitude = 43.262985
-longitude = -2.935013
+data_json = {}
+with open('user_info.json', 'r') as file:
+    data_json = json.loads(file.read())
+
+latitude = data_json["latitude"]
+longitude = data_json["longitude"]
 
 hourly = Hourly()
 daily = Daily()

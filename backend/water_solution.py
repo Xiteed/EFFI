@@ -1,4 +1,5 @@
 import json
+import datetime
 from db_access import get_data
 import pandas as pd
 from weather import get_precipiation
@@ -19,6 +20,23 @@ def get_predicted_water_level():
     else :
         return predicted_value
 
-def is_watering_necessary():
+def get_water_need():
+    data_json = {}
+    with open('water_config.json', 'r') as file:
+        data_json = json.loads(file.read())  
+    mydate = datetime.datetime.now()
+    water_need = float(data_json[mydate.strftime("%B")]) - get_precipiation()
+    return water_need
+
+def get_predicted_water_level_with_use():
+    if is_watering_necessary():
+        return get_predicted_water_level() - get_water_need()
+    else: 
+        return get_predicted_water_level()
     
-    return 
+def is_watering_necessary():
+    if get_water_need() > 0:
+        return True
+    else:
+        return False
+
