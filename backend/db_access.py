@@ -2,7 +2,6 @@ import requests
 import pandas as pd
 import csv
 from datetime import datetime
-import sys
 
 # Declare global parameters for accessing the influxdb.
 URL = "https://corlysis.com:8086/query"
@@ -32,6 +31,6 @@ def get_data(measurement):
         # Convert the column 'time' to a python datetime type.
         df['time'] = df['time'].apply(lambda x: x.str.slice(0, 13))
         df['time'] = [datetime.fromtimestamp(
-            int(int(t) / 1000)) for t in df['time'].squeeze()]
+            int(t) / 1000) for t in [df['time'].squeeze()]]
 
         return df
