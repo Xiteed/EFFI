@@ -24,13 +24,6 @@ def measure_air_quality():
             HUMI = humi
             TEMP = temp
             GAS = gas
-            payload = f'temp_test temperature={temp},humidity={humi},gas={gas}\n'
+            payload = f'air_quality temperature={temp},humidity={humi},gas={gas}\n'
             upload_data(payload)
         time.sleep(1)
-
-
-# if __name__ == '__main__':
-#     try:
-#         measure_air_quality()
-#     except KeyboardInterrupt:
-#         print('\nKeyboard interrupt')

@@ -1,5 +1,6 @@
 import socket
 # import subprocess
+import time
 from website import create_app
 
 app = create_app()
@@ -13,4 +14,5 @@ if __name__ == '__main__':
     # p.wait()
     # out, err = p.communicate()
     # IP_address = out
+    # time.sleep(2)
     app.run(debug=True, host=IP_address, port=8080)

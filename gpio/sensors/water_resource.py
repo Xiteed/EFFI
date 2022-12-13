@@ -28,13 +28,6 @@ def measure():
             # Calculate the tank volume based on the measured distance and the tank volume + height
             volume = round((math.pi * TANK_RADIUS ^ 2 *
                            (TANK_HEIGHT - dist)) / 1000, 2)
-            payload = f'water_test moisture={mois},tank_volume={volume}\n'
+            payload = f'water_resources moisture={mois},tank_volume={volume}\n'
             upload_data(payload)
         time.sleep(1)
-
-
-if __name__ == '__main__':
-    try:
-        measure()
-    except KeyboardInterrupt:
-        print('\nKeyboard interrupt')

@@ -5,23 +5,25 @@
     <h2>Heat Solution</h2>
   </div>
 </div>
-<div class="list-group list-group-flush" id="heat_data">
+{% if air_quality_data %}
+<div class="list-group list-group-flush" id="air_quality_data">
   <div id="temperature" class="panel panel-default">
     <div class="panel-body">
-      <p>Current Temperature: {{ heat_data.temp }}</p>
+      <p>Current Temperature: {{ air_quality_data.temp }}</p>
     </div>
   </div>
   <div id="temperature" class="panel panel-default">
     <div class="panel-body">
-      <p>Current Humidity: {{ heat_data.hum }}</p>
+      <p>Current Humidity: {{ air_quality_data.hum }}</p>
     </div>
   </div>
   <div id="temperature" class="panel panel-default">
     <div class="panel-body">
-      <p>Current Gas Level: {{ heat_data.gas }}</p>
+      <p>Current Gas Level: {{ air_quality_data.gas }}</p>
     </div>
   </div>
 </div>
+{% endif %}
 <div class="row">
   <div class="col text-center">
     <a

@@ -8,7 +8,7 @@ import sys
 URL = "https://corlysis.com:8086/query"
 HEADERS = {"Accept": "application/csv"}
 PARAMS = {"db": "effidb", "u": "token",
-          "p": "1d612c67390c15daa4ab59dcf8016f2c",
+          "p": "24378526400017a008459a68bf933251",
           "q": ""}
 
 
@@ -35,8 +35,3 @@ def get_data(measurement):
             int(int(t) / 1000)) for t in df['time'].squeeze()]
 
         return df
-
-
-# if __name__ == '__main__':
-#     print(get_data("temp_test"))
-    #display.setText(get_data("water_test").iloc[0, 2])

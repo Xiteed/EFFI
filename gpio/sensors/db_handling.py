@@ -2,7 +2,7 @@ import requests
 
 URL = 'https://corlysis.com:8086/write'
 PARAMS = {"db": "effidb", "u": "token",
-          "p": "1d612c67390c15daa4ab59dcf8016f2c"}
+          "p": "24378526400017a008459a68bf933251"}
 
 
 def upload_data(payload):
@@ -10,3 +10,7 @@ def upload_data(payload):
     if (response.status_code != 204):
         print(
             f"ERROR Uploading Data: {response.status_code}, {response.content}")
+
+
+# if __name__ == "__main__":
+#     upload_data('water_resources moisture=265,tank_volume=3.05\n')

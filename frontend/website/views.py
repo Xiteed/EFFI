@@ -4,18 +4,20 @@ import sys
 
 sys.path.append('backend')
 
-from db_access import get_data
+import heat_solution
 import data_collector
+from db_access import get_data
 
 views = Blueprint('views', __name__)
 
 CONFIG_FILE = 'user_info.json'
 STARTED = False
 
+
 @views.route('/')
 def home():
     global STARTED
-    vars = {"started": STARTED}
+    vars = {'started': STARTED}
     return render_template('home.html', vars=vars)
 
 
@@ -68,8 +70,10 @@ def water():
 
 @views.route('/heat', methods=['GET'])
 def heat():
-    heat_data = get_current_temphumgas()
-    return render_template('heat.html', heat_data=heat_data)
+    air_quality_data = heat_solution.get_current_values()
+    if not air_quality_data:
+        flash('Error Accessing DB', category='error')
+    return render_template('heat.html', air_quality_data=air_quality_data)
 
 
 @views.route('/start', methods=['GET'])
@@ -91,16 +95,3 @@ def safe_user_data(data):
     user_data_json = json.dumps(data)
     f = open(CONFIG_FILE, mode='w')
     f.write(user_data_json)
-
-
-def get_current_temphumgas():
-    data = get_data("temp_test")
-    temp = data["temperature"].iloc[-1].item()
-    hum = data["humidity"].iloc[-1].item()
-    gas = data["gas"].iloc[-1].item()
-    data_json = {
-        'temp': temp,
-        'hum': hum,
-        'gas': gas
-    }
-    return data_json
