@@ -7,8 +7,8 @@ data_json = {}
 with open('user_info.json', 'r') as file:
     data_json = json.loads(file.read())
 
-latitude = data_json["latitude"]
-longitude = data_json["longitude"]
+latitude = float(data_json["latitude"])
+longitude = float(data_json["longitude"])
 
 hourly = Hourly()
 daily = Daily()

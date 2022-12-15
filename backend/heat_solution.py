@@ -1,8 +1,11 @@
+import json
 from db_access import get_data
 import weather
 
-OPTIMAL_TEMP = 22
-
+data_json = {}
+with open('user_info.json', 'r') as file:
+    data_json = json.loads(file.read())
+OPTIMAL_TEMP = data_json["optimal_temp"]
 
 def get_current_values():
     try:
@@ -22,23 +25,25 @@ def get_current_values():
     }
     return data_json
 
-
 def get_optimal_ventilation_times():
     global OPTIMAL_TEMP
     temperatures = weather.get_temperature()
-    temperatures['temp_diff'] = OPTIMAL_TEMP - temperatures['temperature_2m']
-    print(temperatures)
-    avg_diff = temperatures['temperature_2m'].mean()
-    print(avg_diff)
-    max_diff = temperatures['temp_diff'].max()
-    min_diff = temperatures['temp_diff'].min()
-    temperatures['temp_diff'] = round(
-        (temperatures['temp_diff'] - min_diff) / (max_diff - min_diff) * 10, 2)
-
+    temperatures = temperatures.iloc[6:23]
+    temperatures = temperatures['temperature_2m'].mean()
+    temperatures = int(temperatures)
+    if (temperatures%2) == 1:
+        temperatures = temperatures - 1
+    data_json = {}
+    with open('ventilation_config.json', 'r') as file:
+        data_json = json.loads(file.read())
+    time_slots = data_json[str(temperatures)]
+    return time_slots
 
 def is_ventilation_necessary():
     # air_quality
-    pass
-
+    if get_current_values["hum"] < 40 or get_current_values["hum"] > 60 or get_current_values["gas"] < 1000 or get_current_values["gas"] > 2000:
+        return True
+ 
+    return False
 
 get_optimal_ventilation_times()
