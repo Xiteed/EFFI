@@ -97,6 +97,14 @@ def start():
     return redirect(url_for('views.home'))
 
 
+@views.route('/stop', methods=['GET'])
+def stop():
+    global STARTED
+    data_collector.stop()
+    STARTED = False
+    return redirect(url_for('views.home'))
+
+
 @views.route('/config/input/latlng', methods=['GET'])
 def set_latlng():
     current_user_data = get_user_data()

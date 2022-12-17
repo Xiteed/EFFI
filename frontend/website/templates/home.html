@@ -9,11 +9,17 @@
 <div class="row">
   <div class="col">Welcome to EFFI's Homepage.</div>
 </div>
-{% if not vars.started %}
 <hr />
+{% if not vars.started %}
 <div class="row">
   <div class="col text-center">
     <a href="/start" class="btn btn-default" role="button">Start Application</a>
+  </div>
+</div>
+{% endif %} {% if vars.started %}
+<div class="row">
+  <div class="col text-center">
+    <a href="/stop" class="btn btn-default" role="button">Stop Application</a>
   </div>
 </div>
 {% endif %} {% endblock %}
