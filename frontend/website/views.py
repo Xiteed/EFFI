@@ -1,10 +1,12 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 import json
 import sys
+import geocoder
 
+# As the dependencies below can be found in different directories, the python PATH variable needs to be adjusted
 sys.path.append('backend')
 
-from db_access import get_data
+import water_solution
 import data_collector
 import heat_solution
 
@@ -17,16 +19,20 @@ STARTED = False
 @views.route('/')
 def home():
     global STARTED
-    vars = {'started': STARTED}
-    return render_template('home.html', vars=vars)
+    if is_user_data_set():
+        vars = {'started': STARTED}
+        return render_template('home.html', vars=vars)
+    else:
+        return redirect(url_for('views.add_config'))
+
 
 
 @views.route('/config', methods=['GET'])
 def config():
-    try:
+    if is_user_data_set():
         user_data = get_user_data()
         return render_template('config.html', user_data=user_data)
-    except:
+    else:
         return redirect(url_for('views.add_config'))
 
 
@@ -59,13 +65,20 @@ def add_config():
             safe_user_data(data)
 
             return redirect(url_for('views.config'))
-
-    return render_template('config_form.html')
+    user_info = get_user_data()
+    return render_template('config_form.html', user_info=user_info)
 
 
 @views.route('/water', methods=['GET'])
 def water():
-    return render_template('water.html')
+    current_values = water_solution.get_current_values()
+    predicted_value = water_solution.get_predicted_water_level()
+    predicted_value_with_watering = water_solution.get_predicted_water_level_with_use()
+    current_values['predicted_value'] = predicted_value
+    current_values['predicted_value_with_watering'] = predicted_value_with_watering
+    if not current_values:
+        flash('Error Accessing DB', category='error')
+    return render_template('water.html', water_resources_data=current_values)
 
 
 @views.route('/heat', methods=['GET'])
@@ -84,6 +97,17 @@ def start():
     return redirect(url_for('views.home'))
 
 
+@views.route('/config/input/latlng', methods=['GET'])
+def set_latlng():
+    current_user_data = get_user_data()
+    geo = geocoder.ipinfo('me')
+    latlng = geo.latlng
+    current_user_data['latitude'] = str(latlng[0])
+    current_user_data['longitude'] = str(latlng[1])
+    safe_user_data(current_user_data)
+    return redirect(url_for('views.add_config'))
+
+
 def get_user_data():
     global CONFIG_FILE
     with open(CONFIG_FILE, 'r') as file:
@@ -97,4 +121,12 @@ def safe_user_data(data):
     f.write(user_data_json)
 
 
-get_user_data()
+def is_user_data_set():
+    user_data = get_user_data()
+    set = True
+    for data in user_data.values():
+        if data == "":
+            set = False
+            break
+    return set
+    

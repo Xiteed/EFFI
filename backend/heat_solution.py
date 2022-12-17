@@ -8,20 +8,25 @@ with open('user_info.json', 'r') as file:
 OPTIMAL_TEMP = data_json["optimal_temp"]
 
 def get_current_values():
-    try:
-        data = get_data("air_quality")
-    except:
-        return False
-    temp = data["temperature"].iloc[-1].item()
-    hum = data["humidity"].iloc[-1].item()
-    gas = data["gas"].iloc[-1].item()
+    # try:
+    #     data = get_data("air_quality")
+    # except:
+    #     return False
+    # temp = data["temperature"].iloc[-1].item()
+    # hum = data["humidity"].iloc[-1].item()
+    # gas = data["gas"].iloc[-1].item()
 
-    # Calculate gas score.
+    # # Calculate gas score.
 
+    # data_json = {
+    #     'temp': temp,
+    #     'hum': hum,
+    #     'gas': gas
+    # }
     data_json = {
-        'temp': temp,
-        'hum': hum,
-        'gas': gas
+        'temp': 22,
+        'hum': 54,
+        'gas': 352
     }
     return data_json
 
@@ -46,4 +51,4 @@ def is_ventilation_necessary():
  
     return False
 
-get_optimal_ventilation_times()
+# get_optimal_ventilation_times()

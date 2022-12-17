@@ -23,7 +23,7 @@ This project is a minimal viable product for an application helping you to safe 
 ### Software Prequisites on Raspberry Pi
 
 - Python Installed
-- Several Python Libraries Installed (requests, pandas, [grove.py](https://github.com/Seeed-Studio/grove.py), openmeteo_py, flask)
+- Several Python Libraries Installed (requests, pandas, [grove.py](https://github.com/Seeed-Studio/grove.py), openmeteo_py, flask, geocoder)
 - Git Installed
 
 ## Available Commands

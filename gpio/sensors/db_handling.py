@@ -13,4 +13,4 @@ def upload_data(payload):
 
 
 if __name__ == "__main__":
-    upload_data('water_resources moisture=412,tank_volume=3.15\n')
+    upload_data('air_quality moisture=412,tank_volume=3.15\n')

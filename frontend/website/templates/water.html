@@ -1,8 +1,59 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
+{% extends "base.html" %} {% block title %}Water Solution{% endblock %} {% block
+content %}
 <div class="row">
   <div class="col text-center">
     <h2>Water Solution</h2>
   </div>
 </div>
-{% endblock %}
+<hr />
+{% if water_resources_data %}
+<div class="container" id="water_resources_data">
+  <div class="row">
+    <div class="col-md-4">
+      <div id="tank_level">
+        <p style="margin: 0; text-align: center">
+          <img
+            src="{{ url_for('static', filename='water-level-icon.png') }}"
+            height="55px"
+            width="55px"
+            alt="Water Level: "
+          />
+          &#8194;{{ water_resources_data.tank_level }} liter
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div id="tank_level_forecast">
+        <p style="margin: 0; text-align: center">
+          <img
+            src="{{ url_for('static', filename='forecasted-water-level-icon.png') }}"
+            height="55px"
+            width="55px"
+            alt="Water Level in 7 Days: "
+          />
+          &#8194;{{ water_resources_data.predicted_value }} liter
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div id="tank_level_forecast_watering">
+        <p style="margin: 0; text-align: center">
+          <img
+            src="{{ url_for('static', filename='forecasted-water-level-with-use-icon.png') }}"
+            height="55px"
+            width="55px"
+            alt="Water Level in 7 Days with Watering necessary Amount: "
+          />
+          &#8194;{{ water_resources_data.predicted_value_with_watering }}l
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+<div id="moisture" class="panel panel-default">
+  <div class="panel-body">
+    Moisture Level: {{ water_resources_data.moisture }}
+  </div>
+</div>
+{% endif %} {% endblock %}
