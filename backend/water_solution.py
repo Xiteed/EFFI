@@ -9,7 +9,8 @@ from weather import get_precipiation
 def get_current_values():
     df = get_data('water_resources').iloc[-1:]
     tank_level = round(float(df['tank_volume'].values[0]), 2)
-    return {'tank_level': tank_level, 'moisture': 'OK'}
+    # return {'tank_level': tank_level, 'moisture': 'OK'}
+    return tank_level
 
 # returns predicted water tank level for in one week without water use 
 def get_predicted_water_level():
