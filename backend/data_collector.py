@@ -7,11 +7,13 @@ import air_quality
 import water_resource
 import window_switch
 
+
 air_quality_thread = None
 water_resource_thread = None
 window_switch_thread = None
 
 def start():
+    # Startup function: Create and start threads for sensoring data.
     global air_quality_thread, water_resource_thread, window_switch_thread
     air_quality_thread = threading.Thread(target=air_quality.measure_air_quality)
     water_resource_thread = threading.Thread(target=water_resource.measure)
@@ -26,6 +28,7 @@ def start():
 
 
 def stop():
+    # Stop function: Change variable in order to stop the threads.
     global air_quality_thread, water_resource_thread
     water_resource.application_stopped = True
     air_quality.application_stopped = True

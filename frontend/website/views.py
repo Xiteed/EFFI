@@ -71,15 +71,14 @@ def add_config():
 
 @views.route('/water', methods=['GET'])
 def water():
-    # current_values = water_solution.get_current_values()
-    # predicted_value = water_solution.get_predicted_water_level()
-    # predicted_value_with_watering = water_solution.get_predicted_water_level_with_use()
-    # current_values['predicted_value'] = predicted_value
-    # current_values['predicted_value_with_watering'] = predicted_value_with_watering
-    # if not current_values:
-    #     flash('Error Accessing DB', category='error')
-    current_values = {'tank_level': 3.5, 'predicted_value': 3.6, 'predicted_value_with_watering': 2.5}
-    return render_template('water.html', water_resources_data=current_values)
+    tank_level = water_solution.get_current_values()
+    predicted_value = water_solution.get_predicted_water_level()
+    predicted_value_with_watering = water_solution.get_predicted_water_level_with_use()
+    data = {'tank_level': tank_level, 'predicted_value': predicted_value, 'predicted_value_with_watering': predicted_value_with_watering}
+    if not tank_level:
+        flash('Error Accessing DB', category='error')
+    # data = {'tank_level': 3.5, 'predicted_value': 3.6, 'predicted_value_with_watering': 2.5}
+    return render_template('water.html', water_resources_data=data)
 
 
 @views.route('/heat', methods=['GET'])
@@ -87,10 +86,9 @@ def heat():
     # air_quality_data = air_quality_solution.get_current_values()
     # if not air_quality_data:
     #     flash('Error Accessing DB', category='error')
-    # optimal_times_arr = air_quality_solution.get_optimal_ventilation_times()
+    optimal_times_arr = air_quality_solution.get_optimal_ventilation_times()
     # if not air_quality_data:
     #     flash('Error Accessing DB', category='error')
-    optimal_times_arr = ["10:00", "10:30", "16:00", "16:30"]
     optimal_times = {'first_slot': optimal_times_arr[0] + " - " + optimal_times_arr[1], 'second_slot': optimal_times_arr[2] + " - " + optimal_times_arr[3], 'third_slot': ''}
     if len(optimal_times_arr) == 6:
         optimal_times['third_slot'] = optimal_times_arr[4] + " - " + optimal_times_arr[5]
