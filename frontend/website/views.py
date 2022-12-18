@@ -15,7 +15,7 @@ views = Blueprint('views', __name__)
 CONFIG_FILE = '/home/pi20/Documents/EFFI/user_info.json'
 STARTED = False
 
-
+# Default route leads to the Homepage
 @views.route('/')
 def home():
     global STARTED
@@ -26,7 +26,7 @@ def home():
         return redirect(url_for('views.add_config'))
 
 
-
+# Config route displays the configurations when they are set. Otherwise redirect to config/input.
 @views.route('/config', methods=['GET'])
 def config():
     if is_user_data_set():
@@ -36,6 +36,7 @@ def config():
         return redirect(url_for('views.add_config'))
 
 
+# Config input displays a form to get configuration information. If any check fails, alert is thrown.
 @views.route('/config/input', methods=['GET', 'POST'])
 def add_config():
     if request.method == 'POST':
@@ -69,6 +70,7 @@ def add_config():
     return render_template('config_form.html', user_info=user_info)
 
 
+# Water solution route gets necessary information and displays them.
 @views.route('/water', methods=['GET'])
 def water():
     tank_level = water_solution.get_current_values()
@@ -81,6 +83,7 @@ def water():
     return render_template('water.html', water_resources_data=data)
 
 
+# Air Quality solution gets necessary information and displays them.
 @views.route('/heat', methods=['GET'])
 def heat():
     # air_quality_data = air_quality_solution.get_current_values()
@@ -96,6 +99,7 @@ def heat():
     return render_template('heat.html', air_quality_data=air_quality_data, optimal_times=optimal_times)
 
 
+# Calls the data collector to start the startup process.
 @views.route('/start', methods=['GET'])
 def start():
     global STARTED
@@ -104,6 +108,7 @@ def start():
     return redirect(url_for('views.home'))
 
 
+# Calls the data collector to stop the data gathering.
 @views.route('/stop', methods=['GET'])
 def stop():
     global STARTED
@@ -112,6 +117,7 @@ def stop():
     return redirect(url_for('views.home'))
 
 
+# Route to set the location using 'geocoder'. Redirect to config form.
 @views.route('/config/input/latlng', methods=['GET'])
 def set_latlng():
     current_user_data = get_user_data()

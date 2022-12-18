@@ -3,17 +3,20 @@ import sys
 from datetime import datetime, timedelta
 from air_quality_solution import get_optimal_ventilation_times, is_ventilation_necessary
 
+# As the dependencies below can be found in different directories, the python PATH variable needs to be adjusted
 sys.path.append('/home/pi20/Documents/EFFI/gpio/actuators')
 
 import display
 import speaker
 import light
 
+
 def manage_window():
     display.setText('')
     display.setText('Window opened.')
     time.sleep(2)
     display.setText('')
+    # While the window is open, checks are made regarding the necessity and time of ventilation 
     while is_window_open():
         ventilation_necessary = is_ventilation_necessary()
         optimal_time_for_ventilation = is_time_optimal()

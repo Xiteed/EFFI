@@ -1,6 +1,8 @@
 import threading
 import sys
 
+
+# As the dependencies below can be found in different directories, the python PATH variable needs to be adjusted
 sys.path.append('/home/pi20/Documents/EFFI/gpio/sensors')
 
 import air_quality

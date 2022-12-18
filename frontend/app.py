@@ -10,6 +10,7 @@ IP_address = socket.gethostbyname(h_name)
 
 
 if __name__ == '__main__':
+    # Open subprocess to get ip address of device.
     # p = subprocess.Popen(['hostname -I'], shell=True, stdout=subprocess.PIPE)
     # p.wait()
     # IP_address = p.stdout.readline()[:-2].decode('UTF-8')
