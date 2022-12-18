@@ -7,53 +7,91 @@ content %}
 </div>
 <hr />
 {% if water_resources_data %}
-<div class="container" id="water_resources_data">
+<div id="water_resources_data">
   <div class="row">
-    <div class="col-md-4">
-      <div id="tank_level">
-        <p style="margin: 0; text-align: center">
-          <img
-            src="{{ url_for('static', filename='water-level-icon.png') }}"
-            height="55px"
-            width="55px"
-            alt="Water Level: "
-          />
-          &#8194;{{ water_resources_data.tank_level }} liter
-        </p>
-      </div>
+    <div class="col-md-4 text-center" id="tank_level">
+      <img
+        src="{{ url_for('static', filename='water-level-icon.png') }}"
+        height="55px"
+        width="55px"
+        alt="Water Level: "
+      />
+      &#8194;{{ water_resources_data.tank_level }} liter
     </div>
-    <div class="col-md-4">
-      <div id="tank_level_forecast">
-        <p style="margin: 0; text-align: center">
-          <img
-            src="{{ url_for('static', filename='forecasted-water-level-icon.png') }}"
-            height="55px"
-            width="55px"
-            alt="Water Level in 7 Days: "
-          />
-          &#8194;{{ water_resources_data.predicted_value }} liter
-        </p>
-      </div>
+    <div class="col-md-4 text-center" id="tank_level_forecast">
+      <img
+        src="{{ url_for('static', filename='forecasted-water-level-icon.png') }}"
+        height="55px"
+        width="55px"
+        alt="Water Level in 7 Days: "
+      />
+      &#8194;{{ water_resources_data.predicted_value }} liter
     </div>
-    <div class="col-md-4">
-      <div id="tank_level_forecast_watering">
-        <p style="margin: 0; text-align: center">
-          <img
-            src="{{ url_for('static', filename='forecasted-water-level-with-use-icon.png') }}"
-            height="55px"
-            width="55px"
-            alt="Water Level in 7 Days with Watering necessary Amount: "
-          />
-          &#8194;{{ water_resources_data.predicted_value_with_watering }}l
-        </p>
-      </div>
+    <div class="col-md-4 text-center" id="tank_level_forecast_watering">
+      <img
+        src="{{ url_for('static', filename='forecasted-water-level-with-use-icon.png') }}"
+        height="55px"
+        width="55px"
+        alt="Water Level in 7 Days with Watering necessary Amount: "
+      />
+      &#8194;{{ water_resources_data.predicted_value_with_watering }}l
     </div>
+  </div>
+</div>
+{% endif %}
+<hr />
+<div class="row">
+  <div class="col">
+    {% if water_resources_data.predicted_value !=
+    water_resources_data.predicted_value_with_watering %}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-cloud-rain"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z"
+      />
+    </svg>
+    &#8194;This week, it is necessary to water the garden with
+    <b
+      >{{ water_resources_data.predicted_value -
+      water_resources_data.predicted_value_with_watering }}</b
+    >
+    liters. {% else %}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-sun"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+      />
+    </svg>
+    &#8194;This week, no watering is necessary. {% endif %}
   </div>
 </div>
 <hr />
-<div id="moisture" class="panel panel-default">
-  <div class="panel-body">
-    Moisture Level: {{ water_resources_data.moisture }}
+<div class="row">
+  <div class="col text-center">
+    <a
+      href="https://corlysis.com/grafana/dashboard/snapshot/d7K5JyF3JYvUUxcCwOyIs3ATblCbSJki"
+      class="btn btn-default"
+      role="button"
+      target="_blank"
+      ><img
+        src="https://cdn.icon-icons.com/icons2/2699/PNG/512/grafana_logo_icon_171048.png"
+        width="25"
+        height="25"
+      />
+      Dashboard
+    </a>
   </div>
 </div>
-{% endif %} {% endblock %}
+{% endblock %}

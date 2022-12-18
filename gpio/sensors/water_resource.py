@@ -9,18 +9,18 @@ MOIS = 0
 DIST = 0
 TANK_RADIUS = 7.5
 TANK_HEIGHT = 24
-STOP = False
+application_stopped = False
 
 
 def measure():
-    global MOIS, DIST, STOP
+    global MOIS, DIST, application_stopped
     # Moisture sensor should be connected to port PWM.
     # Distance sensor should be connected to port D16.
     moisture_sensor = GroveMoistureSensor(2)
     distance_sensor = GroveUltrasonicRanger(16)
 
     # Gather sensor data each second and upload them using imported function 'upload_data' if the data has changed.
-    while not STOP:
+    while not application_stopped:
         dist = distance_sensor.get_distance()
         mois = moisture_sensor.moisture
         if mois != MOIS or dist != DIST:

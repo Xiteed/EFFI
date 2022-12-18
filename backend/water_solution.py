@@ -19,7 +19,8 @@ def get_predicted_water_level():
         data_json = json.loads(file.read())
 
     current_value = get_current_values()['tank_level']
-    predicted_value = current_value + get_precipiation() * float(data_json["roof_size"])
+    predicted_value = current_value + \
+        get_precipiation() * float(data_json["roof_size"])
     if predicted_value > float(data_json["tank_volume"]):
         return float(data_json["tank_volume"])
     else:
@@ -37,7 +38,7 @@ def get_water_need():
 # returns predicted water tank level for in one week with water use 
 def get_predicted_water_level_with_use():
     if is_watering_necessary():
-        return get_predicted_water_level() - get_water_need()
+        return round(get_predicted_water_level() - get_water_need(), 2)
     else:
         return get_predicted_water_level()
 
