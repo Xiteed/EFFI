@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 from openmeteo_py import Hourly, Daily, Options, OWmanager
 
-
+# gets temperature and precipiation from open-meteo
 def get_weather_data():
     data_json = {}
     with open('user_info.json', 'r') as file:
@@ -25,14 +25,14 @@ def get_weather_data():
     meteo = mgr.get_data()
     return meteo
 
-
+# returns hourly temperature of today 
 def get_temperature():
     meteo = get_weather_data()
     dfhourly = pd.DataFrame(meteo["hourly"])
     dfhourly["time"] = [datetime.fromisoformat(t) for t in dfhourly["time"]]
     return dfhourly.iloc[:25, :]
 
-
+# returns precipiation of the week
 def get_precipiation():
     meteo = get_weather_data()
     dfdaily = pd.DataFrame(meteo["daily"])

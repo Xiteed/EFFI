@@ -12,7 +12,7 @@ try:
 except:
     OPTIMAL_TEMP = 22
 
-
+# returns last data base entry of the temperature, humidity and gas
 def get_current_values():
     try:
         data = get_data("air_quality")
@@ -29,7 +29,7 @@ def get_current_values():
     }
     return data_json
 
-
+# returns optimal ventilation time slots 
 def get_optimal_ventilation_times():
     global OPTIMAL_TEMP
     temperatures = weather.get_temperature()
@@ -43,10 +43,9 @@ def get_optimal_ventilation_times():
     time_slots = data_json[str(avg_temperature)]
     return time_slots
 
-
+# returns true if ventilation is necessary
 def is_ventilation_necessary():
     air_quality = get_current_values()
     if int(air_quality["hum"]) < 40 or int(air_quality["hum"]) > 60 or int(air_quality["gas"]) > 1000:
         return True
-
     return False
