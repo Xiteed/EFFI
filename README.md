@@ -28,12 +28,12 @@ This project is a minimal viable product for an application helping you to safe 
 
 ## ⚙️ How to Run
 
-1. Startup Raspberry Pi and configure Hostname as _Raspi20_
+1. Startup Raspberry Pi and configure Hostname as _raspi20_
 2. Create a new directory called 'EFFI' in you _Documents_ folder (`mkdir EFFI`).
-3. Move into that directory (`cd EFFI`) and clone the git project
+3. Move into that directory (`cd EFFI`) and clone the git project <br />
    `git clone https://github.com/Xiteed/IoT_group01_EFFI.git`
-4. Configure crontab by typing `crontab -e` and add the following at the bottom
-   `* * * * * /usr/bin/python3 /home/pi20/Documents/EFFI/backend/observer.py`
+4. Configure crontab by typing `crontab -e` and add the following at the bottom <br />
+   `* * * * * /usr/bin/python3 /home/pi20/Documents/EFFI/backend/observer.py` <br />
    save and exit
 5. Execute `python3 frontend/app.py`
 6. Open _raspi20:8080_ in a Browser to access the web interface
