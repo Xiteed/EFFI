@@ -26,7 +26,8 @@ def get_data(measurement):
         df = pd.DataFrame(data_list[1:], columns=[data_list[0]])
 
         # Remove unnecessary columns 'name' and 'tags'
-        df = df.drop(['name', 'tags'], axis=1)
+        df = df.drop('name', axis=1, level=1)
+        df = df.drop('tags', axis=1, level=1)
 
         # Convert the column 'time' to a python datetime type.
         df['time'] = df['time'].apply(lambda x: x.str.slice(0, 13))

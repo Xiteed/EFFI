@@ -18,10 +18,13 @@ def manage_window():
     display.setText('')
     # While the window is open, checks are made regarding the necessity and time of ventilation 
     while is_window_open():
+        count = 0
+        while is_window_open() and count < 30:
+            count += 1
+            time.sleep(1)
         ventilation_necessary = is_ventilation_necessary()
         optimal_time_for_ventilation = is_time_optimal()
         handle_window(ventilation_necessary, optimal_time_for_ventilation)
-        time.sleep(30)
     display.setText('')
     display.setText('Window closed.')
     time.sleep(2)
@@ -41,7 +44,7 @@ def is_time_optimal():
         datetime.strptime(optimal_ventilation_times_strings[0], '%H:%M'))
     optimal_ventilation_times.append(
         datetime.strptime(optimal_ventilation_times_strings[2], '%H:%M'))
-    if len(optimal_ventilation_times) == 6:
+    if len(optimal_ventilation_times_strings) == 6:
         optimal_ventilation_times.append(
             datetime.strptime(optimal_ventilation_times_strings[4], '%H:%M'))
 
@@ -54,50 +57,32 @@ def is_time_optimal():
 
 
 def is_window_open():
-    with open("/home/pi20/Documents/EFFI/gpio/sensors/window_state.txt", "r") as file:
-        if "open" in file.read():
+    with open('/home/pi20/Documents/EFFI/gpio/sensors/window_state.txt', 'r') as file:
+        if 'open' in file.read():
             return True
     return False
 
 
 def handle_window(ventilation_necessary, optimal_time_for_ventilation):
     if not ventilation_necessary:
-        # Ventilation is not necessary.
-        count1 = 0
-        while is_window_open() and count1 < 30:
-            count1 += 1
-            time.sleep(1)
-        # If after 30 seconds the window is still open a warning is thrown.
+        # Ventilation is not necessary. -> A warning that the window can be closed is thrown.
         if is_window_open():
             light.blink()
+            speaker.make_sound()
             display.setText('')
             display.setText(
-                'Venti. unnecess.\nCan be closed...')
-            count2 = 0
-            while is_window_open() and count2 < 30:
-                count2 += 1
-                time.sleep(1)
-            # If after 60 seconds the window is still open another warning is thrown.
-            if is_window_open():
-                speaker.make_sound()
-                display.setText('')
-                display.setText('Close the Window\navoid Heat Loss')
+                'Vent. unnecess.\nCan be closed.')
     elif ventilation_necessary and not optimal_time_for_ventilation:
-        # Ventilation is necessary but outside of optimal times.
-        count3 = 0
-        while is_window_open() and count3 < 60:
-            count3 += 1
-            time.sleep(1)
-        # If after 60 seconds the window is still open a warning is thrown.
+        # Ventilation is necessary but outside of optimal times. -> A warning to ventilate carefully is thrown.
         if is_window_open():
             light.blink()
             display.setText('')
             display.setText(
-                'Vent not optimal.\nVent. carefully')
+                'Time not optimal\nVent. carefully')
     elif ventilation_necessary and optimal_time_for_ventilation:
         # Ventilation is necessary and inside optimal times.
         count4 = 0
-        while is_window_open() and count4 < 300:
+        while is_window_open() and count4 < 270:
             count4 += 1
             time.sleep(1)
         if is_window_open() and not is_ventilation_necessary():

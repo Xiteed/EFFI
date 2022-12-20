@@ -10,41 +10,37 @@ from window_management import manage_window
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN)
-
-light_state = False
 application_stopped = False
 
+
 def switch():
-    window_state = ''
-    if get_state() == 'closed':
+    if not is_open():
         # Window gets opened -> create and start a thread to handle the opened window.
-        window_state = 'open'
+        write_state('open')
+        time.sleep(1)
         window_management = threading.Thread(target=manage_window)
         window_management.start()
     else:
         # Window gets closed -> change the state
-        window_state = 'closed'
-    # Write the changed window state to the according file to allow other processes to access the window state.
-    write_state(window_state)
+        # Write the changed window state to the according file to allow other processes to access the window state.
+        write_state('closed')
 
 
 def main():
-    try:
-        while not application_stopped:
-            input_state = GPIO.input(23)
-            if input_state == False:
-                # Button is pressed -> Window state changes
-                switch()
-                time.sleep(0.2)
-    finally:
-        GPIO.cleanup()
+    while not application_stopped:
+        input_state = GPIO.input(23)
+        if input_state == False:
+            # Button is pressed -> Window state changes
+            switch()
+            time.sleep(0.2)
 
 
-def get_state():
+def is_open():
     with open("/home/pi20/Documents/EFFI/gpio/sensors/window_state.txt", "r") as file:
         if 'open' in file.read():
-            return 'open'
-    return 'closed'
+            return True
+    return False
+
 
 def write_state(state):
     with open("/home/pi20/Documents/EFFI/gpio/sensors/window_state.txt", "w") as file:
