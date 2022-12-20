@@ -79,23 +79,21 @@ def water():
     data = {'tank_level': tank_level, 'predicted_value': predicted_value, 'predicted_value_with_watering': predicted_value_with_watering}
     if not tank_level:
         flash('Error Accessing DB', category='error')
-    # data = {'tank_level': 3.5, 'predicted_value': 3.6, 'predicted_value_with_watering': 2.5}
     return render_template('water.html', water_resources_data=data)
 
 
 # Air Quality solution gets necessary information and displays them.
 @views.route('/heat', methods=['GET'])
 def heat():
-    # air_quality_data = air_quality_solution.get_current_values()
-    # if not air_quality_data:
-    #     flash('Error Accessing DB', category='error')
+    air_quality_data = air_quality_solution.get_current_values()
+    if not air_quality_data:
+        flash('Error Accessing DB', category='error')
     optimal_times_arr = air_quality_solution.get_optimal_ventilation_times()
-    # if not air_quality_data:
-    #     flash('Error Accessing DB', category='error')
+    if not air_quality_data:
+        flash('Error Accessing DB', category='error')
     optimal_times = {'first_slot': optimal_times_arr[0] + " - " + optimal_times_arr[1], 'second_slot': optimal_times_arr[2] + " - " + optimal_times_arr[3], 'third_slot': ''}
     if len(optimal_times_arr) == 6:
         optimal_times['third_slot'] = optimal_times_arr[4] + " - " + optimal_times_arr[5]
-    air_quality_data = {'temp': 22, 'hum': 54, 'gas': 351}
     return render_template('heat.html', air_quality_data=air_quality_data, optimal_times=optimal_times)
 
 
