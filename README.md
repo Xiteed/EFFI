@@ -24,7 +24,7 @@ This project is a minimal viable product for an application helping you to safe 
 
 - Python Installed
 - Git Installed
-- Several Python Libraries Installed (requests, pandas, [grove.py](https://github.com/Seeed-Studio/grove.py), openmeteo_py, flask, geocoder, )
+- Several Python Libraries Installed (requests, pandas, [grove.py](https://github.com/Seeed-Studio/grove.py), openmeteo_py, flask, geocoder)
 
 ## ⚙️ How to Run
 
