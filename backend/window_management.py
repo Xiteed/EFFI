@@ -21,6 +21,7 @@ def manage_window():
         ventilation_necessary = is_ventilation_necessary()
         optimal_time_for_ventilation = is_time_optimal()
         handle_window(ventilation_necessary, optimal_time_for_ventilation)
+        time.sleep(30)
     display.setText('')
     display.setText('Window closed.')
     time.sleep(2)
@@ -53,30 +54,30 @@ def is_time_optimal():
 
 
 def is_window_open():
-    with open("window_state.txt", "r") as file:
+    with open("/home/pi20/Documents/EFFI/gpio/sensors/window_state.txt", "r") as file:
         if "open" in file.read():
             return True
     return False
 
 
 def handle_window(ventilation_necessary, optimal_time_for_ventilation):
-    if not ventilation_necessary and not optimal_time_for_ventilation:
-        # Ventilation is not necessary and outside of optimal times.
+    if not ventilation_necessary:
+        # Ventilation is not necessary.
         count1 = 0
-        while is_window_open() and count1 < 60:
+        while is_window_open() and count1 < 30:
             count1 += 1
             time.sleep(1)
-        # If after 60 seconds the window is still open a warning is thrown.
+        # If after 30 seconds the window is still open a warning is thrown.
         if is_window_open():
             light.blink()
             display.setText('')
             display.setText(
                 'Venti. unnecess.\nCan be closed...')
             count2 = 0
-            while is_window_open() and count2 < 60:
+            while is_window_open() and count2 < 30:
                 count2 += 1
                 time.sleep(1)
-            # If after 60 seconds more the window is still open another warning is thrown.
+            # If after 60 seconds the window is still open another warning is thrown.
             if is_window_open():
                 speaker.make_sound()
                 display.setText('')
