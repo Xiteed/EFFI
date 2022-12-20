@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block title %}Air Quality Solution{% endblock %} {%
-block content %}
+block head %}<meta http-equiv="refresh" content="20" />{% endblock %} {% block
+content %}
 <div class="row">
   <div class="col text-center">
     <h2>Air Quality Solution</h2>
@@ -25,7 +26,7 @@ block content %}
           d="M5.5 2.5a2.5 2.5 0 0 1 5 0v7.55a3.5 3.5 0 1 1-5 0V2.5zM8 1a1.5 1.5 0 0 0-1.5 1.5v7.987l-.167.15a2.5 2.5 0 1 0 3.333 0l-.166-.15V2.5A1.5 1.5 0 0 0 8 1z"
         />
       </svg>
-      &#8194;Temperature: {{ air_quality_data.temp }}
+      &#8194;Temperature: {{ air_quality_data.temp }}°C
     </div>
     <div id="temperature" class="col-sm-4 text-center">
       <svg
@@ -45,7 +46,7 @@ block content %}
           d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"
         />
       </svg>
-      &#8194;Humidity: {{ air_quality_data.hum }}
+      &#8194;Humidity: {{ air_quality_data.hum }}%
     </div>
     <div id="temperature" class="col-sm-4 text-center">
       <svg
